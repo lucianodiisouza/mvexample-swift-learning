@@ -22,12 +22,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             List(storeModel.products) { product in
-                Text(product.title)
-                
-            }
-                .task {
-                    await populateProducts()
+                VStack {
+                    Text(product.title)
+                    Spacer()
+                    Text(product.price as NSNumber, formatter: NumberFormatter.currency)
                 }
+            }
+            .task {
+                await populateProducts()
+            }
         }
         .padding()
     }
